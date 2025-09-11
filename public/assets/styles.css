@@ -1,0 +1,113 @@
+/* Color Variables */
+:root {
+  --main-bg: #d7e7fa;
+  --primary: #295c93;
+  --sidebar-gradient-from: #7eb6f5;
+  --sidebar-gradient-to: #6ea0d7;
+  --button: #f26c1d;
+  --button-hover: #e25a0d;
+  --white: #fff;
+}
+
+/* General Styles */
+body {
+  background: var(--main-bg);
+  min-height: 100vh;
+  font-family: 'Figtree', sans-serif;
+}
+
+/* Top Bar */
+.top-bar {
+  background: var(--primary);
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+/* Sidebar */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0,0,0,0.3);
+}
+
+.sidebar-panel {
+  position: absolute;
+  left: 0; 
+  top: 0;
+  height: 100%;
+  width: 20rem;
+  background: linear-gradient(135deg, var(--sidebar-gradient-from), var(--sidebar-gradient-to));
+  box-shadow: 0 0 24px rgba(41,92,147,0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  z-index: 50;
+}
+
+/* Sidebar Animation */
+@keyframes sidebarIn {
+  from { transform: translateX(-100%);}
+  to { transform: translateX(0);}
+}
+@keyframes sidebarOut {
+  from { transform: translateX(0);}
+  to { transform: translateX(-100%);}
+}
+.sidebar-panel[x-show="open"] {
+  animation: sidebarIn 0.3s cubic-bezier(.4,0,.2,1) forwards;
+}
+.sidebar-panel[x-show="!open"] {
+  animation: sidebarOut 0.2s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* Text Animation */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.animate-slideUp {
+  opacity: 0;
+  animation: slideUp 0.7s cubic-bezier(.4,0,.2,1) both;
+}
+
+/* Buttons */
+.btn-main {
+  background: var(--button);
+  color: var(--white);
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 0.75rem 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(242,108,29,0.12);
+  margin-bottom: 3rem;
+  transition: background 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-main:hover {
+  background: var(--button-hover);
+}
+
+.btn-secondary {
+  background: var(--button);
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(242,108,29,0.12);
+  transition: background 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  background: var(--button-hover);
+}
+
+/* Utility */
+.text-primary { color: var(--primary);}
+.bg-primary { background: var(--primary);}
+.bg-main { background: var(--main-bg);}
