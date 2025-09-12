@@ -6,22 +6,17 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    // Tampilan awal form invoice check
     public function index()
     {
-        // Dummy data company (nanti bisa diambil dari database)
-        $companies = ['PT. Guntha', 'PT. Maju Jaya', 'PT. Sejahtera'];
-
-        return view('invoice-check', compact('companies'));
+        return view('invoice-check');
     }
 
-    // Hasil pencarian invoice
     public function search(Request $request)
     {
         $orderNumber = $request->order_number;
         $company = $request->company;
 
-        // Dummy data hasil invoice (nanti bisa query ke DB)
+        // Dummy hasil invoice
         $invoice = [
             'order_number' => $orderNumber,
             'company' => $company,
@@ -30,8 +25,6 @@ class InvoiceController extends Controller
             'date' => '2025-09-12',
         ];
 
-        $companies = ['PT. Guntha', 'PT. Maju Jaya', 'PT. Sejahtera'];
-
-        return view('invoice-check', compact('companies', 'invoice'));
+        return view('invoice-check', compact('invoice'));
     }
 }

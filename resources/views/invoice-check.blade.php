@@ -9,7 +9,7 @@
         .container { max-width:600px; margin:50px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
         h2 { text-align:center; background:#004080; color:#fff; padding:10px; border-radius:5px; }
         label { display:block; margin:15px 0 5px; color:#004080; }
-        input, select { width:100%; padding:10px; border:1px solid #ccc; border-radius:5px; margin-bottom:20px; }
+        input { width:100%; padding:10px; border:1px solid #ccc; border-radius:5px; margin-bottom:20px; }
         .btn { display:block; width:100%; background:#ff6600; color:#fff; padding:12px; border:none; border-radius:5px; font-size:16px; cursor:pointer; }
         .btn:hover { background:#e65c00; }
         .invoice-box { margin-top:20px; padding:20px; background:#f9f9f9; border:1px solid #ddd; border-radius:8px; }
@@ -25,13 +25,8 @@
             <label for="order_number">Input your Order Number below</label>
             <input type="text" id="order_number" name="order_number" required>
 
-            <label for="company">Select your Company</label>
-            <select id="company" name="company" required>
-                <option value="">-- Choose Company --</option>
-                @foreach($companies as $c)
-                    <option value="{{ $c }}">{{ $c }}</option>
-                @endforeach
-            </select>
+            <label for="company">Input your Company</label>
+            <input type="text" id="company" name="company" required>
 
             <button type="submit" class="btn">Search Invoice</button>
         </form>
