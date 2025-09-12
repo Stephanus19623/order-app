@@ -11,12 +11,28 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         // Simpan order
-        $order = Order::create([
+        // Cek apakah order dengan data yang sama sudah ada
+        // Cek apakah order dengan data yang sama sudah ada
+        $order = Order::where('company_name', $request->company_name)
+            ->where('product_name', $request->product_name)
+            ->where('quantity', $request->quantity)
+            ->where('price', $request->price)
+            ->first();
+        if ($order) {
+            // Jika order sudah ada, arahkan ke halaman invoice dengan pesan
+            return redirect()->route('invoice.show', $order->id)
+            ->with('message', 'Order already exists.');
+        }
+
+        if (!$order) {
+            // Jika belum ada, buat order baru
+            $order = Order::create([
             'company_name' => $request->company_name,
             'product_name' => $request->product_name,
             'quantity' => $request->quantity,
             'price' => $request->price,
-        ]);
+            ]);
+        }
 
         // Arahkan ke halaman invoice
         return redirect()->route('invoice.show', $order->id);
@@ -35,4 +51,17 @@ class OrderController extends Controller
         $pdf = Pdf::loadView('invoice-pdf', compact('order'));
         return $pdf->download('invoice-'.$order->id.'.pdf');
     }
+
+    public function searchInvoice(Request $request)
+{
+    $id = $request->invoice_id;
+    $order = Order::find($id);
+
+    if (!$order) {
+        return redirect()->back()->with('error', 'Invoice not found!');
+    }
+
+    return redirect()->route('invoice.show', $order->id);
+}
+
 }
