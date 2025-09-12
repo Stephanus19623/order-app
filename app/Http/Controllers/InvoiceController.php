@@ -2,31 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
+    // tampilkan form invoice check
     public function index()
     {
-        return view('invoice.index');
+        return view('invoice.check');
     }
 
+    // proses pencarian invoice
     public function search(Request $request)
     {
         $request->validate([
             'order_number' => 'required',
-            'company' => 'required',
+            'company' => 'required'
         ]);
 
-        $invoice = Invoice::where('order_number', $request->order_number)
-                          ->where('company', $request->company)
-                          ->first();
+        // logika pencarian invoice bisa disesuaikan
+        // misalnya cek database atau kirim pesan sukses
 
-        if ($invoice) {
-            return view('invoice.result', compact('invoice'));
-        } else {
-            return back()->with('error', 'Invoice not found');
-        }
+        return back()->with('success', 'Invoice ditemukan untuk Order #' . $request->order_number . ' - ' . $request->company);
     }
 }

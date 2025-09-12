@@ -5,7 +5,6 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\OrderController;
 
 
 /*
@@ -43,4 +42,20 @@ Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
 Route::get('/invoice/form', [InvoiceController::class, 'form'])->name('invoice.form');
 Route::post('/invoice/search', [InvoiceController::class, 'search'])->name('invoice.search');
+
+
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InvoiceController;
+
+Route::get('/', function () {
+    return view('show'); // halaman awal
+});
+
+// Invoice check
+Route::get('/invoice/check', [InvoiceController::class, 'index'])->name('invoice.check');
+Route::post('/invoice/search', [InvoiceController::class, 'search'])->name('invoice.search');
+
+
 

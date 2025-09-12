@@ -38,8 +38,9 @@
         </form>
 
         <div style="text-align:center;margin-top:1.5rem;">
-            <a href="{{ url('/') }}" class="btn-secondary">Kembali ke Homepage</a>
+            <a href="{{ url('/') }}" class="btn-secondary">⬅ Kembali ke Homepage</a>
         </div>
     </div>
 </body>
 </html>
+<!-- Tombol Invoice Check diarahkan ke halaman form invoice -->

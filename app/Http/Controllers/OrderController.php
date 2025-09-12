@@ -6,14 +6,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    <?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-class OrderController extends Controller
-{
     // Tampilkan form order
     public function create()
     {
@@ -23,18 +15,14 @@ class OrderController extends Controller
     // Simpan data order
     public function store(Request $request)
     {
-        // validasi input
         $request->validate([
-            'product' => 'required',
+            'product' => 'required|string',
             'quantity' => 'required|integer|min:1',
             'notes' => 'nullable|string'
         ]);
 
-        // nanti di sini bisa simpan ke database
-        // Order::create([...]);
-
-        return redirect()->route('orders.create')->with('success', 'Order berhasil disimpan!');
+        // (sementara tidak disimpan ke database, hanya simulasi)
+        return redirect()->route('orders.create')
+            ->with('success', 'Order berhasil disimpan!');
     }
-}
-
 }
