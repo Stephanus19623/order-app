@@ -3,10 +3,11 @@
 <head>
     <title>Invoice Check</title>
     <style>
-        body { background:#dbeafe; font-family: Arial, sans-serif; text-align: center; padding:50px; }
-        .form-container { background:white; padding:20px; border-radius:10px; width:300px; margin:auto; }
-        input { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc; }
-        .btn { background:#f97316; padding:10px 20px; border-radius:5px; color:white; text-decoration:none; display:inline-block; font-weight:bold; }
+        body { background:#dbeafe; font-family: Arial, sans-serif; text-align:center; padding:50px; }
+        h2 { background:#1e40af; color:white; padding:10px; border-radius:5px; width:50%; margin:auto; }
+        .form-container { margin-top:30px; }
+        input { width:300px; padding:12px; margin:15px auto; border-radius:8px; border:none; display:block; }
+        .btn { background:#f97316; padding:15px 30px; border-radius:8px; color:white; text-decoration:none; display:inline-block; font-weight:bold; font-size:18px; border:none; cursor:pointer; }
         .btn:hover { background:#ea580c; }
     </style>
 </head>
@@ -16,10 +17,10 @@
         <form action="{{ route('invoice.check.search') }}" method="POST">
             @csrf
             <label>Input your Order Number below</label>
-            <input type="text" name="order_number" placeholder="Order Number" required>
+            <input type="text" name="order_number" required>
 
             <label>Select your Company</label>
-            <input type="text" name="company" placeholder="Company Name" required>
+            <input type="text" name="company" required>
 
             <button type="submit" class="btn">Search Invoice</button>
         </form>

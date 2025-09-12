@@ -5,7 +5,6 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +46,4 @@ Route::get('/', function () {
 
 Route::get('/invoice-check', [InvoiceController::class, 'checkForm'])->name('invoice.check.form');
 Route::post('/invoice-check', [InvoiceController::class, 'search'])->name('invoice.check.search');
+
