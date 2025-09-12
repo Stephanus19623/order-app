@@ -3,26 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
-    // Tampilkan form order
-    public function create()
-    {
-        return view('orders.create');
-    }
-
-    // Simpan data order
     public function store(Request $request)
     {
-        $request->validate([
-            'product' => 'required|string',
-            'quantity' => 'required|integer|min:1',
-            'notes' => 'nullable|string'
+        // Simpan order
+        $order = Order::create([
+            'company_name' => $request->company_name,
+            'product_name' => $request->product_name,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
         ]);
 
-        // (sementara tidak disimpan ke database, hanya simulasi)
-        return redirect()->route('orders.create')
-            ->with('success', 'Order berhasil disimpan!');
+        // Arahkan ke halaman invoice
+        return redirect()->route('invoice.show', $order->id);
+    }
+
+    public function invoice($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('invoice', compact('order'));
+    }
+
+    public function downloadInvoice($id)
+    {
+        $order = Order::findOrFail($id);
+
+        $pdf = Pdf::loadView('invoice-pdf', compact('order'));
+        return $pdf->download('invoice-'.$order->id.'.pdf');
     }
 }

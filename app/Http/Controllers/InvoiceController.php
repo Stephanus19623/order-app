@@ -35,7 +35,7 @@ class InvoiceController extends Controller
             ]
         ];
 
-        return view('invoice-detail', compact('invoice'));
+        return view('invoice-detail-pdf', compact('invoice'));
     }
 
     public function downloadPDF($orderNumber, $company)
