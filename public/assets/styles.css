@@ -1,113 +1,79 @@
-/* Color Variables */
 :root {
-  --main-bg: #d7e7fa;
-  --primary: #295c93;
-  --sidebar-gradient-from: #7eb6f5;
-  --sidebar-gradient-to: #6ea0d7;
-  --button: #f26c1d;
-  --button-hover: #e25a0d;
-  --white: #fff;
+    --primary: #1a237e;
+    --secondary: #3949ab;
+    --white: #ffffff;
+    --gray: #f5f5f5;
 }
 
-/* General Styles */
 body {
-  background: var(--main-bg);
-  min-height: 100vh;
-  font-family: 'Figtree', sans-serif;
+    margin: 0;
+    font-family: 'Figtree', sans-serif;
+    background-color: var(--gray);
 }
 
-/* Top Bar */
 .top-bar {
-  background: var(--primary);
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  padding: 0 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5rem;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    z-index: 50;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Sidebar */
 .sidebar-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background: rgba(0,0,0,0.3);
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 40;
 }
 
 .sidebar-panel {
-  position: absolute;
-  left: 0; 
-  top: 0;
-  height: 100%;
-  width: 20rem;
-  background: linear-gradient(135deg, var(--sidebar-gradient-from), var(--sidebar-gradient-to));
-  box-shadow: 0 0 24px rgba(41,92,147,0.15);
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16rem;
+    background-color: var(--secondary);
+    padding: 2rem 1.5rem;
+    z-index: 50;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Sidebar Animation */
-@keyframes sidebarIn {
-  from { transform: translateX(-100%);}
-  to { transform: translateX(0);}
-}
-@keyframes sidebarOut {
-  from { transform: translateX(0);}
-  to { transform: translateX(-100%);}
-}
-.sidebar-panel[x-show="open"] {
-  animation: sidebarIn 0.3s cubic-bezier(.4,0,.2,1) forwards;
-}
-.sidebar-panel[x-show="!open"] {
-  animation: sidebarOut 0.2s cubic-bezier(.4,0,.2,1) forwards;
-}
-
-/* Text Animation */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px);}
-  to { opacity: 1; transform: translateY(0);}
-}
-.animate-slideUp {
-  opacity: 0;
-  animation: slideUp 0.7s cubic-bezier(.4,0,.2,1) both;
-}
-
-/* Buttons */
 .btn-main {
-  background: var(--button);
-  color: var(--white);
-  font-weight: bold;
-  font-size: 2rem;
-  padding: 0.75rem 2.5rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 16px rgba(242,108,29,0.12);
-  margin-bottom: 3rem;
-  transition: background 0.2s;
-  border: none;
-  cursor: pointer;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 2rem;
 }
+
 .btn-main:hover {
-  background: var(--button-hover);
+    background-color: var(--secondary);
 }
 
 .btn-secondary {
-  background: var(--button);
-  color: var(--white);
-  font-weight: bold;
-  font-size: 1.25rem;
-  padding: 0.5rem 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 16px rgba(242,108,29,0.12);
-  transition: background 0.2s;
-  border: none;
-  cursor: pointer;
-}
-.btn-secondary:hover {
-  background: var(--button-hover);
+    background-color: var(--white);
+    color: var(--primary);
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 2px solid var(--primary);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-/* Utility */
-.text-primary { color: var(--primary);}
-.bg-primary { background: var(--primary);}
-.bg-main { background: var(--main-bg);}
+.btn-secondary:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
