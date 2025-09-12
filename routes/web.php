@@ -19,7 +19,7 @@ use App\Http\Controllers\InvoiceController;
 */
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('show');
 });
 
 
@@ -37,6 +37,7 @@ Route::get('/orders/{id}', [OrderController::class, 'show']);     // view order 
 Route::get('/my-orders', [OrderController::class, 'myOrders']);   // list company’s orders
 
 // Invoices
-Route::get('/invoice/{orderNumber}', [InvoiceController::class, 'show']);
-Route::get('/invoice/{orderNumber}/download', [InvoiceController::class, 'downloadPDF']);
-Route::post('/search', [InvoiceController::class, 'search'])->name('invoice.search');
+Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+Route::get('/invoice/form', [InvoiceController::class, 'form'])->name('invoice.form');
+Route::post('/invoice/search', [InvoiceController::class, 'search'])->name('invoice.search');
+
