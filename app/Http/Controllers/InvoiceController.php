@@ -6,23 +6,32 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    // tampilkan form invoice check
+    // Tampilan awal form invoice check
     public function index()
     {
-        return view('invoice.check');
+        // Dummy data company (nanti bisa diambil dari database)
+        $companies = ['PT. Guntha', 'PT. Maju Jaya', 'PT. Sejahtera'];
+
+        return view('invoice-check', compact('companies'));
     }
 
-    // proses pencarian invoice
+    // Hasil pencarian invoice
     public function search(Request $request)
     {
-        $request->validate([
-            'order_number' => 'required',
-            'company' => 'required'
-        ]);
+        $orderNumber = $request->order_number;
+        $company = $request->company;
 
-        // logika pencarian invoice bisa disesuaikan
-        // misalnya cek database atau kirim pesan sukses
+        // Dummy data hasil invoice (nanti bisa query ke DB)
+        $invoice = [
+            'order_number' => $orderNumber,
+            'company' => $company,
+            'status' => 'Paid',
+            'amount' => 'Rp 5.000.000',
+            'date' => '2025-09-12',
+        ];
 
-        return back()->with('success', 'Invoice ditemukan untuk Order #' . $request->order_number . ' - ' . $request->company);
+        $companies = ['PT. Guntha', 'PT. Maju Jaya', 'PT. Sejahtera'];
+
+        return view('invoice-check', compact('companies', 'invoice'));
     }
 }
