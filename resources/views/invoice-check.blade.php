@@ -13,18 +13,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Check Your Invoice</h2>
-        <form method="POST" action="{{ route('invoice.search') }}">
-            @csrf
-            <label>Order Number</label>
-            <input type="text" name="order_number" required>
+    <form method="POST" action="{{ route('invoice.search') }}">
+    @csrf
+    <label>Order Number</label>
+    <input type="text" name="order_number" required>
 
-            <label>Company</label>
-            <input type="text" name="company" required>
+    <label>Company</label>
+    <input type="text" name="company" required>
 
-            <button type="submit">Search Invoice</button>
-        </form>
-    </div>
+    <button type="submit">Search Invoice</button>
+</form>
 </body>
 </html>

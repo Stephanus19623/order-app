@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf; // pastikan sudah install barryvdh/laravel-dompdf
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class InvoiceController extends Controller
 {
@@ -15,7 +15,7 @@ class InvoiceController extends Controller
     public function search(Request $request)
     {
         $data = [
-            'id' => rand(1000,9999), // contoh dummy, nanti bisa ambil dari DB
+            'id' => rand(1000, 9999),
             'order_number' => $request->order_number,
             'company' => $request->company,
             'status' => 'Paid',
@@ -23,6 +23,16 @@ class InvoiceController extends Controller
             'date' => now()->format('d-m-Y'),
         ];
 
+        // ⬅️ bedanya di sini: redirect ke halaman baru
+        return redirect()->route('invoice.result')->with('invoice', $data);
+    }
+
+    public function result()
+    {
+        $data = session('invoice');
+        if (!$data) {
+            return redirect()->route('invoice.index')->with('error', 'No invoice found!');
+        }
         return view('invoice-result', compact('data'));
     }
 

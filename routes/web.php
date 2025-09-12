@@ -5,7 +5,6 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
-Route::get('/invoice/{id}/download', [OrderController::class, 'downloadInvoice'])->name('download.invoice');
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,6 @@ Route::get('/invoice/{id}/download', [OrderController::class, 'downloadInvoice']
 Route::get('/', function () {
     return view('show');
 });
-
 
 // Company Registration
 Route::get('/register-company', [CompanyController::class, 'create']);
@@ -61,5 +59,9 @@ Route::get('/invoice/{orderNumber}/{company}', [InvoiceController::class, 'show'
 Route::get('/invoice/{orderNumber}/{company}/pdf', [InvoiceController::class, 'downloadPDF'])->name('invoice.downloadPDF');
 Route::get('/invoice/{orderNumber}/{company}/image', [InvoiceController::class, 'downloadImage'])->name('invoice.downloadImage');
 
-Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('invoice.show');
+// Invoice flow
+Route::get('/invoice-check', [InvoiceController::class, 'index'])->name('invoice.index');
+Route::post('/invoice-check', [InvoiceController::class, 'search'])->name('invoice.search');
+Route::get('/invoice/{id}/download', [InvoiceController::class, 'download'])->name('invoice.download');
 
+Route::get('/invoice-result', [InvoiceController::class, 'result'])->name('invoice.result');
