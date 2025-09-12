@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,11 @@ Route::get('/my-orders', [OrderController::class, 'myOrders']);   // list compan
 // Invoices
 Route::get('/invoice/{orderNumber}', [InvoiceController::class, 'show']);
 Route::get('/invoice/{orderNumber}/download', [InvoiceController::class, 'downloadPDF']);
+
+
+Route::get('/', function () {
+    return view('home'); // halaman awal
+});
+
+Route::get('/invoice-check', [InvoiceController::class, 'checkForm'])->name('invoice.check.form');
+Route::post('/invoice-check', [InvoiceController::class, 'search'])->name('invoice.check.search');
