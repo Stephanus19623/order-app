@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -35,6 +36,8 @@ Route::get('/orders/create', [OrderController::class, 'create']); // order form
 Route::post('/orders', [OrderController::class, 'store']);        // save order
 Route::get('/orders/{id}', [OrderController::class, 'show']);     // view order details
 Route::get('/my-orders', [OrderController::class, 'myOrders']);   // list company’s orders
+Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 // Invoices
 Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');

@@ -50,11 +50,12 @@
                     </button>
                 </div>
                 <!-- Tombol Order Now diarahkan ke halaman form order -->
-<a href="{{ url('/orders/create') }}">
-    <button class="btn-main animate-slideUp" style="animation-delay:0.7s;animation-fill-mode:forwards;">
-        Order Now
-    </button>
+<a href="{{ route('orders.create') }}" 
+   class="btn-main animate-slideUp" 
+   style="animation-delay:0.7s;animation-fill-mode:forwards;">
+   Order Now
 </a>
+
 
 <!-- Tombol Invoice Check diarahkan ke halaman form invoice -->
 <a href="{{ url('/invoice/form') }}">
