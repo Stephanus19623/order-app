@@ -15,10 +15,14 @@
     </button>
 </form>
 </a>
-@if(session('error'))
-    <div style="color:red; text-align:center; margin-bottom:15px;">
-        {{ session('error') }}
-    </div>
-@endif
+<a href="{{ route('orders.create') }}" 
+   class="btn-main animate-slideUp" 
+   style="animation-delay:0.7s;animation-fill-mode:forwards;">
+   Order Now
+</a>
+<a href="{{ route('invoice.index') }}" 
+   class="btn-secondary animate-slideUp" 
+   style="animation-delay:0.9s;animation-fill-mode:forwards; margin-left:10px;">
+   Check Invoice
 </body>
 </html>
