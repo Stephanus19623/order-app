@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,4 @@ Route::get('/my-orders', [OrderController::class, 'myOrders']);   // list compan
 // Invoices
 Route::get('/invoice/{orderNumber}', [InvoiceController::class, 'show']);
 Route::get('/invoice/{orderNumber}/download', [InvoiceController::class, 'downloadPDF']);
+Route::post('/search', [InvoiceController::class, 'search'])->name('invoice.search');
