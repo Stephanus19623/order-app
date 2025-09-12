@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Check</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f4f7fa; }
+        .container { max-width:500px; margin:80px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+        h2 { text-align:center; margin-bottom:20px; color:#333; }
+        label { font-weight:bold; margin-top:10px; display:block; }
+        input { width:100%; padding:10px; margin-top:5px; border:1px solid #ccc; border-radius:5px; }
+        button { width:100%; margin-top:20px; padding:12px; background:#007bff; border:none; color:#fff; border-radius:5px; cursor:pointer; font-size:16px;}
+        button:hover { background:#0056b3; }
+    </style>
 </head>
-<body style="font-family:Arial, sans-serif;background:#eef3f9;padding:40px;">
-    <h2>Check Your Invoice</h2>
-    <form action="{{ route('invoice.search') }}" method="POST">
-        @csrf
-        <label>Order Number</label>
-        <input type="text" name="order_number" required><br><br>
+<body>
+    <div class="container">
+        <h2>Check Your Invoice</h2>
+        <form method="POST" action="{{ route('invoice.search') }}">
+            @csrf
+            <label>Order Number</label>
+            <input type="text" name="order_number" required>
 
-        <label>Company</label>
-        <input type="text" name="company" required><br><br>
+            <label>Company</label>
+            <input type="text" name="company" required>
 
-        <button type="submit">Search Invoice</button>
-    </form>
+            <button type="submit">Search Invoice</button>
+        </form>
+    </div>
 </body>
 </html>
