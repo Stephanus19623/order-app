@@ -18,7 +18,7 @@ use App\Http\Controllers\InvoiceController;
 */
 
 Route::get('/', function () {
-    return view('show');
+    return view('homepage');
 });
 
 

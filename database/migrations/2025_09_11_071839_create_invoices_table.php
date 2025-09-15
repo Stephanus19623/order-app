@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
+            $table->foreignId('order_id')->constrained(
+                table: 'orders',
+                indexName:'invoices_order_id_foreign'
+            );
             $table->string('invoice_number')->unique();
             $table->timestamps();
         });

@@ -18,4 +18,34 @@ class InvoiceController extends Controller
 
         return view('invoice-result', compact('orderNumber', 'company'));
     }
+
+    public function index()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show($id)
+    {
+        //
+    }
+    
+    public function update(Request $request, $id)
+    {
+        //
+    }
+    
+    public function destroy($id)
+    {
+        //
+    }
+
+    public function edit($id)
+    {
+        //
+    }
 }
