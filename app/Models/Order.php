@@ -4,34 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'company_id',
-        'product_id',
-        'quantity',
+        'order_number',
+        'total',
         'due_date',
         'status',
-
     ];
 
-    public function product(): BelongsTo
+    // Relasi ke produk (jika 1 order punya banyak produk)
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(OrderItem::class); // biasanya ada tabel pivot order_items
     }
 
-    public function quantity():HasMany
+    // Relasi ke perusahaan
+    public function company()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function company(): BelongsTo
+    // Relasi ke invoice
+    public function invoice()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasOne(Invoice::class, 'order_id');
     }
-
 }

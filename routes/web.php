@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
