@@ -7,79 +7,92 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e6f1fd;
+            background-color: #E6F2FF;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        .header {
-            background-color: #1d4e89;
-            height: 20px;
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            width: 450px;
+            overflow: hidden;
         }
-        .container {
-            max-width: 500px;
-            margin: 3rem auto;
-            background: #dceeff;
-            padding: 2rem;
-            border-radius: 12px;
+
+        .form-header {
+            background-color: #004A99;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .form-body {
+            padding: 25px;
             text-align: center;
         }
-        .title {
-            background-color: #004c97;
-            color: #fff;
-            padding: 0.7rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
+
+        .form-body p {
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #333;
+            text-align: left;
         }
-        .input-box {
+
+        input {
             width: 100%;
-            padding: 0.8rem;
-            margin: 0.8rem 0;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-        }
-        .btn-main {
-            background: #f97316;
-            color: white;
-            border: none;
-            padding: 0.9rem 1.5rem;
-            font-size: 1rem;
+            padding: 12px;
+            margin-bottom: 18px;
             border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #FF6600;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
             font-weight: bold;
         }
-        .btn-main:hover {
-            background: #ea580c;
-        }
-        .success {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+
+        button:hover {
+            background-color: #E65C00;
         }
     </style>
 </head>
 <body>
-    <div class="header"></div>
+    <div class="form-container">
+        <div class="form-header">
+            Invoice Check
+        </div>
+        <div class="form-body">
+            @if(session('error'))
+                <p style="color:red; text-align:center;">{{ session('error') }}</p>
+            @endif
 
-    <div class="container">
-        <div class="title">Invoice Check</div>
+            <form action="{{ route('invoice.check.search') }}" method="POST">
+                @csrf
+                <p>Input your Order Number below</p>
+                <input type="text" name="order_number" placeholder="Order Number" required>
 
-        @if(session('success'))
-            <div class="success">{{ session('success') }}</div>
-        @endif
+                <p>Select your Company</p>
+                <input type="text" name="company" placeholder="Company Name" required>
 
-        <form method="POST" action="{{ route('invoice.search') }}">
-            @csrf
-            <label>Input your Order Number below</label>
-            <input type="text" name="order_number" class="input-box" placeholder="Enter Order Number" required>
-
-            <label>Select your Company</label>
-            <input type="text" name="company" class="input-box" placeholder="Enter Company Name" required>
-
-            <button type="submit" class="btn-main">Search Invoice</button>
-        </form>
+                <button type="submit">Search Invoice</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

@@ -11,9 +11,14 @@ use Illuminate\Support\Str;
 
 class InvoiceController extends Controller
 {
+    public function index()
+    {
+        return view('Invoice.index'); // halaman daftar/awal invoice
+    }
+
     public function checkForm()
     {
-        return view('invoice-check');
+        return view('Invoice.check');
     }
 
     public function search(Request $request)
@@ -21,16 +26,24 @@ class InvoiceController extends Controller
         $orderNumber = $request->order_number;
         $company     = $request->company;
 
-        return view('invoice-result', compact('orderNumber', 'company'));
+        // nanti bisa tambahin logic cari order
+        return view('Invoice.result', compact('orderNumber', 'company'));
     }
 
-    //  fitur baru
+    public function show($orderNumber)
+    {
+        $order   = Order::where('order_number', $orderNumber)->firstOrFail();
+        $invoice = $order->invoice;
+
+        return view('Invoice.show', compact('order', 'invoice'));
+    }
+
     public function downloadPDF($orderNumber)
     {
         $order = Order::where('order_number', $orderNumber)->first();
 
         if (! $order) {
-            return redirect()->route('invoice.check.form')
+            return redirect()->route('nvoice.check.form')
                              ->with('error', 'Order not found.');
         }
 
@@ -46,7 +59,7 @@ class InvoiceController extends Controller
             'orderNumber' => $orderNumber,
         ];
 
-        $pdf = Pdf::loadView('invoice-pdf', $data);
+        $pdf = Pdf::loadView('invoice.pdf', $data);
 
         $filename = 'invoice_' . $invoice->invoice_number . '.pdf';
 
@@ -55,11 +68,8 @@ class InvoiceController extends Controller
         return $pdf->download($filename);
     }
 
-    // fungsi default bawaan
-    public function index() {}
-    public function store(Request $request) {}
-    public function show($id) {}
-    public function update(Request $request, $id) {}
-    public function destroy($id) {}
-    public function edit($id) {}
+    public function printing()
+    {
+        return view('Invoice.printing');
+    }
 }

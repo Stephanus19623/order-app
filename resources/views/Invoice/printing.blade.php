@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice Index</title>
+  <title>Invoice Printing</title>
 </head>
-<body>
-  <h1>Invoice Page</h1>
-  <p><a href="{{ route('invoice.check.form') }}">🔎 Check Invoice</a></p>
+<body onload="window.print()">
+  <h1>Invoice Printing Page</h1>
+  <p>Use your browser’s print dialog to print this invoice.</p>
   <p><a href="{{ route('home') }}">⬅ Back to Home</a></p>
 </body>
 </html>
