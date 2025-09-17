@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -18,20 +20,18 @@ class Order extends Model
     ];
 
     // Relasi ke produk (jika 1 order punya banyak produk)
-    public function products()
+    public function product(): BelongsTo
     {
-        return $this->hasMany(OrderItem::class); // biasanya ada tabel pivot order_items
+        return $this->belongsTo(Product::class);
     }
 
-    // Relasi ke perusahaan
-    public function company()
+    public function total():HasMany
     {
-        return $this->belongsTo(Company::class, 'company_id');
+        return $this->hasMany(Product::class);
     }
 
-    // Relasi ke invoice
-    public function invoice()
+    public function company(): BelongsTo
     {
-        return $this->hasOne(Invoice::class, 'order_id');
+        return $this->belongsTo(Company::class);
     }
 }

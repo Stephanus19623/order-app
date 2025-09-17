@@ -34,7 +34,7 @@
 
 <nav class="navbar navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="{{ route('home') }}">⚙️ Order System</a>
+    <a class="navbar-brand" href="{{ route('homepage') }}">⚙️ Order System</a>
   </div>
 </nav>
 
