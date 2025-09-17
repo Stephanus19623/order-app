@@ -8,13 +8,18 @@ use App\Http\Controllers\InvoiceController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 
-
 // =====================
 // ROUTE HOME
 // =====================
 Route::get('/', function () {
-    return view('homepage');  // halaman utama
-});
+    return view('show');  // tampilkan show.blade.php
+})->name('home');
+
+// =====================
+// ROUTE HOMEPAGE BUTTON
+// =====================
+Route::get('/order-now', [OrderController::class, 'orderNow'])->name('order.now');
+Route::get('/invoice-check', [OrderController::class, 'invoiceCheck'])->name('invoice.check');
 
 // =====================
 // COMPANY
@@ -75,10 +80,5 @@ Route::get('/test-pdf', function () {
     return view('invoice.pdf'); // untuk tes tampilan pdf.blade.php
 });
 
-
-// ... (route lainnya mungkin sudah ada di sini)
-
 Route::get('/invoice-printing', [InvoiceController::class, 'showPrintingPage'])->name('invoice.print');
-
 Route::get('/invoice/download', [InvoiceController::class, 'downloadPdf'])->name('invoice.download');
-

@@ -20,4 +20,21 @@ class OrderController extends Controller
     {
         return view('Order.order'); // ganti dengan view form order yang kamu punya
     }
+
+    // =====================
+    // Tambahan baru untuk tombol Home
+    // =====================
+   public function orderNow()
+{
+    // arahkan ke halaman order
+    return redirect()->route('order');
 }
+
+public function invoiceCheck()
+{
+    // arahkan ke halaman invoice
+    return redirect()->route('invoice.index');
+}
+
+}
+

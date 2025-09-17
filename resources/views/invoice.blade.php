@@ -24,7 +24,7 @@
         }
         .invoice-header h2 {
             font-weight: 700;
-            color: #343a40;
+            color: #343a40;  
         }
         .invoice-details p {
             margin-bottom: 5px;
