@@ -1,65 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\InvoiceController;
 
-// =====================
-// ROUTE HOME
-// =====================
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
 Route::get('/', function () {
-    return view('home'); // file resources/views/home.blade.php
-})->name('home');
+    return view('homepage');
+});
 
-// =====================
-// COMPANY
-// =====================
-Route::get('/register-company', [App\Http\Controllers\CompanyController::class, 'create'])->name('company.create');
-Route::post('/register-company', [App\Http\Controllers\CompanyController::class, 'store'])->name('company.store');
 
-// =====================
-// PRODUCTS
-// =====================
-Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+// Company Registration
+Route::get('/register-company', [CompanyController::class, 'create']);
+Route::post('/register-company', [CompanyController::class, 'store']);
 
-// =====================
-// ORDERS (multi step form + controller)
-// =====================
+// Products
+Route::get('/products', [ProductController::class, 'index']);
 
-// Step 1 - Form awal
-Route::get('/order', function () {
-    return view('order-step1'); // file: resources/views/order-step1.blade.php
-})->name('order.step1');
+// Orders
+Route::get('/orders/create', [OrderController::class, 'create']); // order form
+Route::post('/orders', [OrderController::class, 'store']);        // save order
+Route::get('/orders/{id}', [OrderController::class, 'show']);     // view order details
+Route::get('/my-orders', [OrderController::class, 'myOrders']);   // list company’s orders
 
-// Step 1 submit → ke Step 2
-Route::post('/order/step1', function (Request $request) {
-    session([
-        'order_step1' => $request->only([
-            'buyer_name',
-            'company_name',
-            'address',
-            'email',
-            'parts_name',
-            'due_date',
-        ]),
-    ]);
-
-    return redirect()->route('order.step2');
-})->name('order.step1.submit');
-
-// Step 2 - Form lanjutan
-Route::get('/order/step2', function () {
-    return view('order-step2'); // file: resources/views/order-step2.blade.php
-})->name('order.step2');
-
-// Step 2 submit → Success page
-Route::post('/order/step2', function (Request $request) {
-    $step1 = session('order_step1', []);
-    $step2 = $request->only(['materials', 'delivery', 'quantity']);
-
-    $data = array_merge($step1, $step2);
-
-    // clear session biar ga numpuk
-    session()->forget('order_step1');
-
-    return view('order-success', compact('data')); // file: resources/views/order-success.blade.php
-})->name('order.step2.submit');
+// Invoices
+Route::get('/invoice/{orderNumber}', [InvoiceController::class, 'show']);
+Route::get('/invoice/{orderNumber}/download', [InvoiceController::class, 'downloadPDF']);
