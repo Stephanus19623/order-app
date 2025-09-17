@@ -63,3 +63,6 @@ Route::post('/order/step2', function (Request $request) {
 
     return view('order-success', compact('data')); // file: resources/views/order-success.blade.php
 })->name('order.step2.submit');
+
+
+Route::get('/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.index');

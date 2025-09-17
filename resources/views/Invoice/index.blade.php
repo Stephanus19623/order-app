@@ -7,7 +7,7 @@
 </head>
 <body>
   <h1>Invoice Page</h1>
-  <p><a href="{{ route('invoice.check.form') }}">🔎 Check Invoice</a></p>
+  <p><a href="{{ route('invoice.index') }}">🔎 Check Invoice</a></p>
   <p><a href="{{ route('home') }}">⬅ Back to Home</a></p>
 </body>
 </html>
