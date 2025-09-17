@@ -9,7 +9,7 @@ class OrderController extends Controller
     // Tampilkan form order
     public function create()
     {
-        return view('orders.create');
+        return view('order');
     }
 
     // Simpan data order
@@ -19,12 +19,14 @@ class OrderController extends Controller
         $request->validate([
             'product' => 'required',
             'quantity' => 'required|integer|min:1',
-            'notes' => 'nullable|string'
+            'notes' => 'nullable|string',
+            'created_at' => 'nullable|date',
         ]);
 
         // nanti di sini bisa simpan ke database
         // Order::create([...]);
 
-        return redirect()->route('orders.create')->with('success', 'Order berhasil disimpan!');
+        return redirect()->route('order.complete')->with('success', 'Order berhasil disimpan!');
     }
 }
+    

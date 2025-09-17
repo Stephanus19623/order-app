@@ -1,68 +1,85 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
 
 // =====================
 // ROUTE HOME
 // =====================
 Route::get('/', function () {
-    return view('homepage'); // file resources/views/home.blade.php
+    return view('homepage');  // halaman utama
 })->name('homepage');
 
 // =====================
 // COMPANY
 // =====================
-Route::get('/register-company', [App\Http\Controllers\CompanyController::class, 'create'])->name('company.create');
-Route::post('/register-company', [App\Http\Controllers\CompanyController::class, 'store'])->name('company.store');
+Route::get('/register-company', [CompanyController::class, 'create']);
+Route::post('/register-company', [CompanyController::class, 'store']);
 
 // =====================
 // PRODUCTS
 // =====================
-Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'index']);
 
 // =====================
-// ORDERS (multi step form + controller)
+// ORDERS
 // =====================
-
-// Step 1 - Form awal
 Route::get('/order', function () {
-    return view('order-step1'); // file: resources/views/order-step1.blade.php
-})->name('order.step1');
+    return view('orders.orders'); // form step 1
+    
+})->name('order');
 
-// Step 1 submit → ke Step 2
-Route::post('/order/step1', function (Request $request) {
+Route::post('/order/submit', function (Request $request) {
     session([
-        'order_step1' => $request->only([
-            'buyer_name',
-            'company_name',
-            'address',
-            'email',
-            'parts_name',
-            'due_date',
-        ]),
+        'step1' => $request->only([
+            'buyer_name', 'company_name', 'address', 'email', 'parts_name', 'due_date'
+        ])
     ]);
-
     return redirect()->route('order.step2');
-})->name('order.step1.submit');
 
-// Step 2 - Form lanjutan
+})->name('order.submit');
 Route::get('/order/step2', function () {
-    return view('order-step2'); // file: resources/views/order-step2.blade.php
+    $step1 = session('step1');
+    if (! $step1) {
+        return redirect()->route('order'); // jika belum ada data step 1, kembali ke form awal
+    }
+    return view('orders.orders-step2', ['data' => $step1]);
 })->name('order.step2');
 
-// Step 2 submit → Success page
-Route::post('/order/step2', function (Request $request) {
-    $step1 = session('order_step1', []);
-    $step2 = $request->only(['materials', 'delivery', 'quantity']);
+Route::post('/order/complete', function (Request $request) {
+    $data = array_merge(
+        session('step1', []),
+        $request->only(['materials', 'delivery', 'quantity'])
+    );
 
-    $data = array_merge($step1, $step2);
+    session()->forget('step1'); // hapus session setelah selesai
 
-    // clear session biar ga numpuk
-    session()->forget('order_step1');
+    return view('orders.orders-success', ['data' => $data]);
+})->name('order.complete');
 
-    return view('order-success', compact('data')); // file: resources/views/order-success.blade.php
-})->name('order.step2.submit');
+// =====================
+// INVOICES
+// =====================
+Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+Route::get('/invoice/pdf', [InvoiceController::class, 'downloadPdf'])->name('invoice.pdf');
+
+// OPTIONAL: test lihat pdf view
+Route::get('/test-pdf', function () {
+    return view('invoice.pdf'); // untuk tes tampilan pdf.blade.php
+});
 
 
-Route::get('/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.index');
+
+Route::get('/invoice-printing', [InvoiceController::class, 'showPrintingPage'])->name('invoice.print');
+
+Route::get('/invoice/download', [InvoiceController::class, 'downloadPdf'])->name('invoice.download');
+
+
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+
+Route::post('/orders/step2/submit', [OrderController::class, 'step2Submit'])->name('orders.step2.submit');

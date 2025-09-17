@@ -14,7 +14,7 @@
       </div>
 
       <div class="mt-4">
-        <a href="{{ route('home') }}" class="btn btn-primary rounded-pill px-4">🏠 Back to Home</a>
+        <a href="{{ route('homepage') }}" class="btn btn-primary rounded-pill px-4">🏠 Back to Home</a>
       </div>
     </div>
   </div>

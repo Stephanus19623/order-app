@@ -8,6 +8,6 @@
 <body onload="window.print()">
   <h1>Invoice Printing Page</h1>
   <p>Use your browser’s print dialog to print this invoice.</p>
-  <p><a href="{{ route('home') }}">⬅ Back to Home</a></p>
+  <p><a href="{{ route('homepage') }}">⬅ Back to Home</a></p>
 </body>
 </html>

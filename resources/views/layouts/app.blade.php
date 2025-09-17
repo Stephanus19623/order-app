@@ -32,12 +32,6 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark">
-  <div class="container">
-    <a class="navbar-brand" href="{{ route('home') }}">⚙️ Order System</a>
-  </div>
-</nav>
-
 <div class="container my-5">
   @yield('content')
 </div>

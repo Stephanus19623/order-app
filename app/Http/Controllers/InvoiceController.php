@@ -13,12 +13,12 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        return view('Invoice.index'); // halaman daftar/awal invoice
+        return view('invoice.index'); // halaman daftar/awal invoice
     }
 
     public function checkForm()
     {
-        return view('Invoice.check');
+        return view('invoice.check');
     }
 
     public function search(Request $request)
@@ -27,7 +27,7 @@ class InvoiceController extends Controller
         $company     = $request->company;
 
         // nanti bisa tambahin logic cari order
-        return view('Invoice.result', compact('orderNumber', 'company'));
+        return view('invoice.result', compact('orderNumber', 'company'));
     }
 
     public function show($orderNumber)
@@ -35,7 +35,7 @@ class InvoiceController extends Controller
         $order   = Order::where('order_number', $orderNumber)->firstOrFail();
         $invoice = $order->invoice;
 
-        return view('Invoice.show', compact('order', 'invoice'));
+        return view('invoice.show', compact('order', 'invoice'));
     }
 
     public function downloadPDF($orderNumber)
@@ -43,7 +43,7 @@ class InvoiceController extends Controller
         $order = Order::where('order_number', $orderNumber)->first();
 
         if (! $order) {
-            return redirect()->route('nvoice.check.form')
+            return redirect()->route('invoice.check')
                              ->with('error', 'Order not found.');
         }
 
@@ -70,6 +70,6 @@ class InvoiceController extends Controller
 
     public function printing()
     {
-        return view('Invoice.printing');
+        return view('invoice.printing');
     }
 }

@@ -8,7 +8,7 @@
     <div class="card p-4">
       <h3 class="mb-4 text-center" style="color:#004a99;">Step 2 - Additional Details</h3>
 
-      <form action="{{ route('orders.step2.submit') }}" method="POST">
+      <form action="{{ route('order.complete') }}" method="POST">
         @csrf
         <div class="mb-3">
           <label class="form-label">Materials</label>

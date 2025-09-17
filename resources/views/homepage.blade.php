@@ -73,8 +73,8 @@
                 <p class="animate-slideUp" style="font-size:1.25rem;color:var(--primary);text-align:center;margin-bottom:2rem;animation-delay:0.5s;animation-fill-mode:forwards;">
                     Welcome! Please make an order below<br>before purchasing at our services.
                 </p>
-                <button class="btn-main animate-slideUp" style="animation-delay:0.7s;animation-fill-mode:forwards;">
-                    Order Now
+                <button class="btn-main animate-slideUp" style="animation-delay:0.7s;animation-fill-mode:forwards;"><a href="{{ route('order') }}" style="text-decoration:none;color:var(--white);">
+                    Order Now</a>
                 </button>
                 <p class="animate-slideUp" style="font-size:1.1rem;color:var(--primary);text-align:center;margin-bottom:1rem;animation-delay:0.9s;animation-fill-mode:forwards;">
                     Or if you have placed an order, you can check<br>for your invoice.

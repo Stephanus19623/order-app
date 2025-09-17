@@ -8,6 +8,6 @@
 <body>
   <h1>Invoice Page</h1>
   <p><a href="{{ route('invoice.index') }}">🔎 Check Invoice</a></p>
-  <p><a href="{{ route('home') }}">⬅ Back to Home</a></p>
+  <p><a href="{{ route('homepage') }}">⬅ Back to Home</a></p>
 </body>
 </html>
