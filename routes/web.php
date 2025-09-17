@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 // ROUTE HOME
 // =====================
 Route::get('/', function () {
-    return view('home'); // file resources/views/home.blade.php
-})->name('home');
+    return view('homepage'); // file resources/views/home.blade.php
+})->name('homepage');
 
 // =====================
 // COMPANY
