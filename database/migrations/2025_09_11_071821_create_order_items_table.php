@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('order_id');
-            $table->integer('quantity');
+            $table->string('customer_name'); // nama pemesan
+            $table->enum('status', ['On Progress', 'Checked', 'Deliver'])->default('On Progress');
             $table->timestamps();
         });
     }

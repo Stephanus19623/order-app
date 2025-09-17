@@ -9,19 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignID('company_id')->constrained(
-                table: 'companies',
-                indexName:'orders_company_id_foreign'
-            );
-            $table->dateTime('due_date');
-            $table->string('status')->default('pending');
+            $table->string('item_name');
+            $table->integer('quantity');
+            $table->enum('status', ['On Progress', 'Checked', 'Deliver'])->default('On Progress');
             $table->timestamps();
         });
-    }
+    }  
 
     /**
      * Reverse the migrations.
