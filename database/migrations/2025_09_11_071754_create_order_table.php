@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Product;
 
 return new class extends Migration
 {
@@ -14,14 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignID('company_id')->constrained(
-                table: 'companies',
-                indexName:'orders_company_id_foreign'
-            );
-            $table->foreignId('product_id')->constrained(
-                table: Product::class,
-                indexName:'orders_product_id_foreign'
-            );
+            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('product_id')->constrained('products');
             $table->integer('quantity');
             $table->dateTime('due_date');
             $table->string('status')->default('pending');
