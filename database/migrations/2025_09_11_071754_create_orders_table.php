@@ -14,17 +14,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignID('company_id')->constrained(
-                table: 'companies',
-                indexName:'orders_company_id_foreign'
-            );
-            $table->foreignId('product_id')->constrained(
-                table: Product::class,
-                indexName:'orders_product_id_foreign'
-            );
+            $table->string('company_name');
+            $table->string('buyer_name');
+            $table->string('delivery')->nullable(); 
             $table->integer('quantity');
             $table->dateTime('due_date');
-            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Purchasing Order Form</title>
+    <title>Invoice List</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -11,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
     <!-- Alpine.js for sidebar interactivity -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
 </head>
 <body>
     <div x-data="{ open: false }" class="relative min-h-screen">
@@ -60,30 +59,22 @@
                 </a>
             </nav>
         </div>
+    </div>
 
-        <!-- Main Content -->
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 5rem);padding:1rem;">
-            <h1 class="animate-slideUp" style="font-size:3rem;font-weight:800;color:var(--primary);text-align:center;margin-top:4rem;margin-bottom:0.5rem;animation-delay:0.3s;animation-fill-mode:forwards;">
-                Purchasing<br>Order Form
-            </h1>
-            <p class="animate-slideUp" style="font-size:1.25rem;color:var(--primary);text-align:center;margin-bottom:2rem;animation-delay:0.5s;animation-fill-mode:forwards;">
-                Welcome! Please make an order below<br>before purchasing at our services.
-            </p>
-
-            <!-- Tombol Order Now -->
-            <a href="{{ route('order.create') }}" class="btn-main" style="display:inline-block; text-align:center; text-decoration:none; ">
-                Order Now
-            </a>
-
-            <p class="animate-slideUp" style="font-size:1.1rem;color:var(--primary);text-align:center;margin-bottom:1rem;animation-delay:0.9s;animation-fill-mode:forwards;">
-                Or if you have placed an order, you can check<br>for your invoice.
-            </p>
-
-            <!-- Tombol Invoice Check -->
-            <a href="{{ route('invoice.check') }}" class="btn-secondary" style="display:inline-block; text-align:center; text-decoration:none;">
-                Invoice Check
-            </a>
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="text-center mb-4">Check Your Invoice</h2>
+        <form action="{{ route('invoice.check') }}" method="GET" class="mb-4">
+            <div class="form-group">
+                <input type="text" name="invoice_number" class="form-control" placeholder="Enter Invoice Number" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div class="invoice-list">
+            <!-- Placeholder for invoice list -->
+            <p>No invoices found. Please enter an invoice number to search.</p>
         </div>
+        <a href="{{ url('/') }}" class="btn px-4" style="font-weight: 700; font-size: 1rem;">Back to Homepage</a>
     </div>
 </body>
 </html>

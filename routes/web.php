@@ -5,36 +5,82 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// =====================
+// ROUTE HOME
+// =====================
 Route::get('/', function () {
-    return view('homepage');
-});
+    return view('homepage');  // tampilkan show.blade.php
+})->name('homepage');
 
+// =====================
+// ROUTE HOMEPAGE BUTTON
+// =====================
+Route::get('/order-now', [OrderController::class, 'orderNow'])->name('order.now');
+Route::get('/invoice-check', [OrderController::class, 'invoiceCheck'])->name('invoice.check');
 
-// Company Registration
+// =====================
+// COMPANY
+// =====================
 Route::get('/register-company', [CompanyController::class, 'create']);
 Route::post('/register-company', [CompanyController::class, 'store']);
 
-// Products
+// =====================
+// PRODUCTS
+// =====================
 Route::get('/products', [ProductController::class, 'index']);
 
-// Orders
-Route::get('/orders/create', [OrderController::class, 'create']); // order form
-Route::post('/orders', [OrderController::class, 'store']);        // save order
-Route::get('/orders/{id}', [OrderController::class, 'show']);     // view order details
-Route::get('/my-orders', [OrderController::class, 'myOrders']);   // list company’s orders
+// =====================
+// ORDERS
+// =====================
+Route::get('/order', function () {
+    return view('order'); // form step 1
+})->name('order');
 
-// Invoices
-Route::get('/invoice/{orderNumber}', [InvoiceController::class, 'show']);
-Route::get('/invoice/{orderNumber}/download', [InvoiceController::class, 'downloadPDF']);
+// Route::post('/order/submit', function (Request $request) {
+//     session([
+//         'step1' => $request->only([
+//             'buyer_name', 'company_name', 'address', 'email', 'parts_name', 'due_date'
+//         ])
+//     ]);
+//     return redirect()->route('order.step2');
+// })->name('order.submit');
+
+// Route::get('/order/step2', function () {
+//     return view('order-step2');
+// })->name('order.step2');
+
+// Route::post('/order/complete', function (Request $request) {
+//     $data = array_merge(
+//         session('step1', []),
+//         $request->only(keys: ['materials', 'delivery', 'quantity'])
+//     );
+
+//     return view('order-success', ['data' => $data]);
+// })->name('order.complete');
+
+// Order Controller Routes (kalau kamu pakai controller juga)
+Route::get('/orders/create', [OrderController::class, 'create']);
+Route::post('/orders/complete', [OrderController::class, 'store']);
+Route::get('/orders/{id}', [OrderController::class, 'show']);
+Route::get('/my-orders', [OrderController::class, 'myOrders']);
+
+// =====================
+// INVOICES
+// =====================
+Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+Route::get('/invoice/pdf', [InvoiceController::class, 'downloadPdf'])->name('invoice.pdf');
+Route::get('/invoice-check', [InvoiceController::class, 'invoiceCheck'])->name('invoice.check');
+
+// OPTIONAL: test lihat pdf view
+Route::get('/test-pdf', function () {
+    return view('invoice.pdf'); // untuk tes tampilan pdf.blade.php
+});
+
+Route::get('/invoice-printing', [InvoiceController::class, 'showPrintingPage'])->name('invoice.print');
+Route::get('/invoice/download', [InvoiceController::class, 'downloadPdf'])->name('invoice.download');
+
+Route::resource('companies', CompanyController::class);
+Route::resource('order', OrderController::class);
