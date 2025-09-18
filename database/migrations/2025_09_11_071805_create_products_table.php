@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name'); // nama pemesan
-            $table->enum('status', ['On Progress', 'Checked', 'Deliver'])->default('On Progress');
+            $table->string('name');      // nama barang
+            $table->decimal('price', 12, 2);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
