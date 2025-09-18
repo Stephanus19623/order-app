@@ -84,3 +84,9 @@ Route::get('/invoice/download', [InvoiceController::class, 'downloadPdf'])->name
 
 Route::resource('companies', CompanyController::class);
 Route::resource('order', OrderController::class);
+
+// Halaman pilih company
+Route::get('/order-lists', [OrderController::class, 'choose'])->name('orderlist.choose');
+
+// Setelah pilih company → tampilkan order
+Route::post('/order-lists', [OrderController::class, 'listByCompany'])->name('orders.listByCompany');

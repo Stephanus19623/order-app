@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Product;
 
 return new class extends Migration
 {
@@ -19,6 +18,7 @@ return new class extends Migration
             $table->string('delivery')->nullable(); 
             $table->integer('quantity');
             $table->dateTime('due_date');
+            $table->enum('status', ['On Progress', 'Checked', 'Deliver'])->default('On Progress');
             $table->timestamps();
         });
     }

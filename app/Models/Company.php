@@ -9,14 +9,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Company extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'address',
         'email',
+        'phone',
     ];
 
-    public function products(): HasMany
+    // Relasi: 1 perusahaan bisa punya banyak order
+    public function orders()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Order::class);
     }
 }

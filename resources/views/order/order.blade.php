@@ -100,51 +100,52 @@
                 </a>
             </nav>
         </div>
-        
-<div class="container mt-5" style="max-width: 900px;">
-    <div class="form-title">Ordering Form</div>
-    
-    <div class="form-section">
-        <form method="POST" action="{{ route('order.store') }}">
-            @csrf
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="buyer_name" class="form-label">Buyer's Name</label>
-                    <input type="text" class="form-control" id="buyer_name" name="buyer_name" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="parts_name" class="form-label">Parts Name</label>
-                    <input type="text" class="form-control" id="parts_name" name="parts_name" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="company_name" class="form-label">Company Name</label>
-                    <input type="text" class="form-control" id="company_name" name="company_name" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="due_date" class="form-label">Due Date</label>
-                    <input type="date" class="form-control" id="due_date" name="due_date" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-            </div>
-
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-orange px-5 py-2">NEXT</button>
-            </div>
-        </form>
     </div>
-</div>
+        
+    <div class="container mt-5" style="max-width: 900px;">
+        <div class="form-title">Ordering Form</div>
+    
+        <div class="form-section">
+            <form method="POST" action="{{ route('order.store') }}">
+                @csrf
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="buyer_name" class="form-label">Buyer's Name</label>
+                        <input type="text" class="form-control" id="buyer_name" name="buyer_name" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="parts_name" class="form-label">Parts Name</label>
+                        <input type="text" class="form-control" id="parts_name" name="parts_name" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="company_name" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="company_name" name="company_name" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="due_date" class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="due_date" name="due_date" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-orange px-5 py-2">NEXT</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -13,21 +13,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained(
-                table: 'companies',
-                indexName:'products_company_id_foreign'
-            );
-            $table->string('name');
-            $table->text('detail');
+            $table->string('name');      // nama barang
+            $table->decimal('price', 12, 2);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('orders');
     }
 };

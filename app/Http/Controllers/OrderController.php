@@ -2,14 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
-
+use App\Models\Company;
+use Illuminate\Http\Request;
 class OrderController extends Controller
 {
+    // Halaman pilih company
+    public function choose()
+    {
+        $companies = Company::all();
+        return view('orderlist.choose', compact('companies'));
+    }
+
+    // Tampilkan list order berdasarkan company
+    public function listByCompany(Request $request)
+    {
+        $companyId = $request->company_id;
+
+        $orders = Order::with('items.product')
+                    ->where('company_id', $companyId)
+                    ->get();
+
+        return view('order.index', compact('orders'));
+    }
+
+    // Tabel semua order (kalau mau tanpa filter)
     public function index()
     {
-        return view('homepage');
+        $orders = Order::with('items.product')->get();
+        return view('order.index', compact('orders'));
     }
 
     public function create()
@@ -53,5 +74,9 @@ public function store(Request $request)
         return redirect()->route('order.index')->with('success', 'Order created successfully!');
     }
 
-}
+    public function return()
+    {
+        return view('homepage');
+    }
 
+}
