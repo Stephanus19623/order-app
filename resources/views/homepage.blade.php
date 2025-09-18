@@ -49,7 +49,7 @@
                 </button>
             </div>
             <nav style="display:flex;flex-direction:column;gap:2rem;margin-top:2rem;">
-                <a href="#" class="flex items-center gap-3 text-lg font-semibold animate-slideUp" style="color:var(--white);animation-delay:0.1s;animation-fill-mode:forwards;">
+                <a href="{{ route('companies.create') }}" class="flex items-center gap-3 text-lg font-semibold animate-slideUp" style="color:var(--white);animation-delay:0.1s;animation-fill-mode:forwards;">
                     Register Your Company
                 </a>
                 <a href="{{ route('orderlist.choose') }}" class="flex items-center gap-3 text-lg font-semibold animate-slideUp" style="color:var(--white);animation-delay:0.25s;animation-fill-mode:forwards;">

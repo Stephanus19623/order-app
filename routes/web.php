@@ -21,11 +21,6 @@ Route::get('/', function () {
 Route::get('/order-now', [OrderController::class, 'orderNow'])->name('order.now');
 Route::get('/invoice-check', [OrderController::class, 'invoiceCheck'])->name('invoice.check');
 
-// =====================
-// COMPANY
-// =====================
-Route::get('/register-company', [CompanyController::class, 'create']);
-Route::post('/register-company', [CompanyController::class, 'store']);
 
 // =====================
 // PRODUCTS
@@ -36,7 +31,7 @@ Route::get('/products', [ProductController::class, 'index']);
 // ORDERS
 // =====================
 Route::get('/order', function () {
-    return view('order'); // form step 1
+    return view('order.order'); // form step 1
 })->name('order');
 
 // Route::post('/order/submit', function (Request $request) {
@@ -82,7 +77,7 @@ Route::get('/test-pdf', function () {
 Route::get('/invoice-printing', [InvoiceController::class, 'showPrintingPage'])->name('invoice.print');
 Route::get('/invoice/download', [InvoiceController::class, 'downloadPdf'])->name('invoice.download');
 
-Route::resource('companies', CompanyController::class);
+// Route::resource('companies', CompanyController::class);
 Route::resource('order', OrderController::class);
 
 // Halaman pilih company
@@ -90,3 +85,15 @@ Route::get('/order-lists', [OrderController::class, 'choose'])->name('orderlist.
 
 // Setelah pilih company → tampilkan order
 Route::post('/order-lists', [OrderController::class, 'listByCompany'])->name('orders.listByCompany');
+
+// =====================
+// COMPANY REGISTRATION
+// =====================
+
+// Rute untuk menampilkan halaman pendaftaran perusahaan (GET)
+Route::get('/register-company', [CompanyController::class, 'create'])->name('companies.create');
+
+Route::get('/register-company/success', [CompanyController::class, 'success'])->name('companies.success');
+
+// Rute untuk memproses data pendaftaran perusahaan (POST)
+Route::post('/register-company', [CompanyController::class, 'store'])->name('companies.store');

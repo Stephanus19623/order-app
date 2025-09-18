@@ -14,7 +14,7 @@ class Company extends Model
         'name',
         'address',
         'email',
-        'phone',
+        'contact_number',
     ];
 
     // Relasi: 1 perusahaan bisa punya banyak order

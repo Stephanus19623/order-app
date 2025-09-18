@@ -17,10 +17,10 @@ class OrderController extends Controller
     // Tampilkan list order berdasarkan company
     public function listByCompany(Request $request)
     {
-        $companyId = $request->company_id;
+        $companyId = $request->id;
 
         $orders = Order::with('items.product')
-                    ->where('company_id', $companyId)
+                    ->where('id', $companyId)
                     ->get();
 
         return view('order.index', compact('orders'));
