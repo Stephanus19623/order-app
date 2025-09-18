@@ -73,15 +73,12 @@
             </form>
         </div>
     </div>
-
+    
+    <body>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Gunakan console.log untuk debugging
-        console.log('Script di halaman ini berhasil dijalankan.');
-        
-        // Cek apakah ada flash message 'success'
+        // Logika untuk menampilkan pop-up SweetAlert2
         if ("{{ session('success') }}") {
-            console.log('Flash message ditemukan:', "{{ session('success') }}");
             Swal.fire({
                 icon: 'success',
                 title: 'Registry Success!',
@@ -92,7 +89,7 @@
                 allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "/";
+                    window.location.href = "{{ route('welcome') }}";
                 }
             });
         }

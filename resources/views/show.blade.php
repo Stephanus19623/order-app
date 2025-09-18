@@ -50,7 +50,7 @@
                     </button>
                 </div>
                 <nav style="display:flex;flex-direction:column;gap:2rem;margin-top:2rem;">
-                    <a href="#" class="flex items-center gap-3 text-lg font-semibold animate-slideUp" style="color:var(--white);animation-delay:0.1s;animation-fill-mode:forwards;">
+                    <a href="{{ route('company.register') }}" class="flex items-center gap-3 text-lg font-semibold animate-slideUp" style="color:var(--white);animation-delay:0.1s;animation-fill-mode:forwards;">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M5 13l4 4L19 7"/></svg>
                         Register Your Company
                     </a>

@@ -1,46 +1,43 @@
 <?php
+// app/Http/Controllers/CompanyController.php
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session; // Tambahkan ini
+use Illuminate\Support\Facades\Session;
+use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display the company registration form.
-     *
-     * @return \Illuminate\View\View
-     */
     public function create()
     {
         return view('company.create');
     }
 
-    /**
-     * Store a newly created company in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function success()
+    {
+        return view('company.success');
+    }
+
     public function store(Request $request)
     {
-        // Validasi data
+        // PERBAIKAN: Gunakan nama field yang benar sesuai form (name="...")
         $request->validate([
             'company_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'contact_number' => 'required|string|max:20',
-            'email' => 'required|email|unique:users|max:255', // Sesuaikan 'users' dengan tabel Anda jika berbeda
+            'email' => 'required|email|unique:companies|max:255'
         ]);
 
-        // Simulasikan penyimpanan ke database
-        // Misalnya: Company::create($request->all());
-
-        // Setelah berhasil, arahkan kembali ke halaman form dengan pesan sukses
-        return redirect()->route('company.register')->with('success', 'Registry Success!');
+        // PERBAIKAN: Gunakan nama field yang sama untuk menyimpan ke database
+        Company::create([
+            'company_name' => $request->company_name,
+            'address' => $request->address,
+            'contact_number' => $request->contact_number,
+            'email' => $request->email,
+        ]);
+        
+        // PERBAIKAN: Redirect kembali ke halaman pendaftaran dengan pesan sukses
+        return redirect()->route('company.register')->with('success', 'Pendaftaran berhasil!');
     }
-
-    // Method `success` sudah tidak diperlukan lagi
-    // karena pop-up akan ditampilkan di halaman yang sama
-    // Hapus method ini dan route terkait untuk menjaga kode tetap bersih
 }
